@@ -17,6 +17,8 @@ In order to run this project, you will need the following:
 - Set the destination location in the code.
 
 ## Usage
+**PLEASE ALWAYS START BY RUNNING LINK LIB TASK**
+**PLEASE RUN PREPARE FOR COMMIT BEFORE COMMIT**
 Once the robot is set up and the code is uploaded, it will automatically begin following the tape of the specified color. The robot uses multithreading to ensure that it can both follow the tape and avoid obstacles in its path.
 If the robot encounters an obstacle, it will use its proximity sensors to determine the best path around it. Once it reaches the destination location, it will stop moving.
 
