@@ -30,5 +30,7 @@ If you would like to contribute to this project, please follow these steps:
 - Create a new pull request on GitHub.
   
 ## Help
-If you need help you can refernce any of the help files below:
-- [Makefile](/Help/makefile_help.md#introduction)
+If you need help you can refernce the links below:
+- [Wiki](https://github.com/Tony-Hany/ROBOTIQUE/wiki)
+- [epuck](https://www.gctronic.com/doc/index.php/e-puck2)
+- [Cortex-M4](https://developer.arm.com/Processors/Cortex-M4)
