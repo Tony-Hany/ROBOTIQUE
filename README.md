@@ -31,4 +31,4 @@ If you would like to contribute to this project, please follow these steps:
   
 ## Help
 If you need help you can refernce any of the help files below:
-- [Makefile](makefile_help.md)
+- [Makefile](https://github.com/Tony-Hany/ROBOTIQUE/blob/master/Help/makefile_help.md#introduction)
