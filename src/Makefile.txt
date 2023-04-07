@@ -9,7 +9,7 @@ PROJECT = LineFollower
 
 GLOBAL_PATH = ../e-puck2_main-processor
 
-CSRC += main.c \
+CSRC += main.c motor.c
 
 ASMSRC +=
 
@@ -59,7 +59,10 @@ LDFLAGS += -Wl,--no-warn-mismatch,--gc-sections,--script=$(LDSCRIPT)
 # SECTION 3 - Make targets:
 ###########################
 
-include $(GLOBAL_PATH)/Makefile
+.PHONY: all
+all: $(PROJECT).elf $(PROJECT).list $(PROJECT).size $(PROJECT).mem
+	$(SZ) $(PROJECT).elf
+	@ echo "> Done"
 
 .PHONY: dclean
 dclean:
@@ -132,3 +135,15 @@ $(PROJECT).size: $(PROJECT).elf
 $(PROJECT).mem: $(PROJECT).elf
 	@echo "> Creating" $@
 	$(NM) --numeric-sort --print-size $< > $@
+
+.PHONY: flash
+flash: all
+	arm-none-eabi-gdb --command=../../debug.gdb --command=../../flash.gdb $(PROJECT).elf
+
+-include $(CSRC:%.c=%.d)
+
+ifneq ("$(wildcard ../e-puck2_main-processor/Makefile)","")
+    include $(GLOBAL_PATH)/Makefile
+else
+    $(warning >>>> Makefile not found in ../e-puck2_main-processor directory)
+endif

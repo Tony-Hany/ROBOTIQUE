@@ -33,6 +33,36 @@
             }
         },
         {
+            "label": "Project:Deep Clean",
+            "type": "shell",
+            "command": "${config:make_path} dclean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/src/"
+            },
+            "presentation": {
+                "echo": false,
+            }
+        },
+        {
+            "label": "Project: Prepare for commit",
+            "type": "shell",
+            "command": "${config:make_path} commitprep",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/src/"
+            },
+            "presentation": {
+                "echo": false,
+            }
+        },
+        {
             "label": "Project:(Link Library e-puck2_main-processor)",
             "type": "shell",
             "linux": {
@@ -42,7 +72,6 @@
                 "command": "LIB=e-puck2_main-processor; if [ -d $LIB ] ; then echo -n -e '\\033[0;91m'Link $LIB already present ; echo '\\033[0m'>>/dev/null ; else ln -s ${config:workplace}/Lib/$LIB . ; echo -n -e '\\033[1;32m'Link $LIB done ! ; echo '\\033[0m'>>/dev/null ; fi ; echo '\n'",
             },
             "windows": {
-                // DONT FORGET To change the Library name in the second parameter on the link command
                 "command": "LIB=e-puck2_main-processor; if [ -d $LIB ] ; then echo -n -e '\\033[0;91m'Link $LIB already present ; echo '\\033[0m'>>/dev/null ; else C://Windows//System32//cmd.exe <<< \"mklink /J $LIB ${config:workplaceAS}\\Lib\\e-puck2_main-processor & exit\" >>/dev/null; echo -n -e '\\033[1;32m'Link $LIB done ! ; echo '\\033[0m'>>/dev/null ; fi ; echo '\n'",
             },
             "group": {
@@ -57,8 +86,8 @@
             "label": "Project:(Unlink Library e-puck2_main-processor)",
             "type": "shell",
             "windows": {
-                "command": "LIB=e-puck2_main-processor; C://Windows//System32//cmd.exe <<< \"rmdir C:\\Users\\tonyh\\Documents\\Workspace_project\\Projet\\ROBOTIQUE\\e-puck2_main-processor & exit\" >>/dev/null; echo -n -e '\\033[1;32m'Unlink $LIB done ! ; echo '\\033[0m'>>/dev/null; echo '\n'",
-            },
+                "command": "if [ -d 'C://Users//tonyh//Documents//Workspace_project//Projet//ROBOTIQUE//e-puck2_main-processor' ] ; then C://Windows//System32//cmd.exe <<< 'rmdir C:\\Users\\tonyh\\Documents\\Workspace_project\\Projet\\ROBOTIQUE\\e-puck2_main-processor & exit' >>/dev/null; echo -e '\\033[1;32me-puck2_main-processor unlink done !'; else echo -e '\\033[0;91me-puck2_main-processor does not exist'; fi",
+            },            
             "group": {
                 "kind": "build",
                 "isDefault": true
