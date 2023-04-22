@@ -9,7 +9,7 @@ PROJECT = LineFollower
 
 GLOBAL_PATH = ../e-puck2_main-processor
 
-CSRC += main.c \
+CSRC += ./main.c \
 
 ASMSRC +=
 
@@ -29,6 +29,8 @@ LLIBDIR = $(patsubst %,-L%,$(LIBDIR))
 
 #SECTION 2 - Compiler settings:
 ###############################
+
+ifeq ($(optimise), true)
 
 MCU  = cortex-m4
 
@@ -56,10 +58,14 @@ ASFLAGS = -mcpu=$(MCU) $(TOPT)
 LDFLAGS = -mcpu=$(MCU) $(OPT) -nostartfiles $(LLIBDIR) $(TOPT)
 LDFLAGS += -Wl,--no-warn-mismatch,--gc-sections,--script=$(LDSCRIPT)
 
+endif
+
 # SECTION 3 - Make targets:
 ###########################
 
 include $(GLOBAL_PATH)/Makefile
+
+ifeq ($(optimise), true)
 
 .PHONY: dclean
 dclean:
@@ -132,3 +138,5 @@ $(PROJECT).size: $(PROJECT).elf
 $(PROJECT).mem: $(PROJECT).elf
 	@echo "> Creating" $@
 	$(NM) --numeric-sort --print-size $< > $@
+
+endif

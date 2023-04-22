@@ -2,9 +2,41 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Project: Make",
+            "label": "Project: Default Make",
             "type": "shell",
             "command": "${config:make_path} -j",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/src/"
+            },
+            "presentation": {
+                "echo": false,
+            }
+        },
+        {
+            "label": "Project: Make",
+            "type": "shell",
+            "command": "LIB=e-puck2_main-processor; if [ -d '../e-puck2_main-processor' ] ; then ${config:make_path} -j; else echo 'Library not found. Linking:'; C://Windows//System32//cmd.exe <<< \"mklink /J C:\\Users\\tonyh\\Documents\\Workspace_project\\Projet\\ROBOTIQUE\\e-puck2_main-processor ${config:workplaceAS}\\Lib\\e-puck2_main-processor & exit\" >>/dev/null; echo -n -e '\\033[1;32m'Link $LIB done ! ; echo '\\033[0m'>>/dev/null ; echo '\n'; ${config:make_path} -j; fi",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+            "options": {
+                "cwd": "${workspaceFolder}/src/"
+            },
+            "presentation": {
+                "echo": false,
+            }
+        },
+        {
+            "label": "Project: Make++",
+            "type": "shell",
+            "command": "LIB=e-puck2_main-processor; if [ -d '../e-puck2_main-processor' ] ; then ${config:make_path} optimise=true -j; else echo 'Library not found. Linking:'; C://Windows//System32//cmd.exe <<< \"mklink /J C:\\Users\\tonyh\\Documents\\Workspace_project\\Projet\\ROBOTIQUE\\e-puck2_main-processor ${config:workplaceAS}\\Lib\\e-puck2_main-processor & exit\" >>/dev/null; echo -n -e '\\033[1;32m'Link $LIB done ! ; echo '\\033[0m'>>/dev/null ; echo '\n'; ${config:make_path} optimise=true -j; fi",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -35,7 +67,7 @@
         {
             "label": "Project:Deep Clean",
             "type": "shell",
-            "command": "${config:make_path} dclean",
+            "command": "${config:make_path} optimise=true dclean",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -50,7 +82,7 @@
         {
             "label": "Project: Prepare for commit",
             "type": "shell",
-            "command": "${config:make_path} commitprep",
+            "command": "${config:make_path} optimise=true commitprep",
             "group": {
                 "kind": "build",
                 "isDefault": true
